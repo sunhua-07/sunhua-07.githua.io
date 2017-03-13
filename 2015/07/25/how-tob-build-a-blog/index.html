@@ -1,0 +1,607 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>通过Hexo与github搭建一个静态的个人博客 | SUN&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="孙华">
+    
+
+    
+    <meta name="description" content="通过Hexo与github搭建一个静态博客 | Sun&apos;s Blog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过Hexo与github搭建一个静态的个人博客">
+<meta property="og:url" content="http://sunhua-07.github.io/2015/07/25/how-tob-build-a-blog/index.html">
+<meta property="og:site_name" content="SUN's blog">
+<meta property="og:description" content="通过Hexo与github搭建一个静态博客 | Sun&apos;s Blog">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/1.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/2.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/3.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/4.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/5.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/61.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/6.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/7.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/8.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/s10.jpg">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/11.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/s12.jpg">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/13.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/15.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/16.png">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/17.jpg">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/18.jpg">
+<meta property="og:image" content="http://cnfeat.qiniudn.com/19.jpg">
+<meta property="og:updated_time" content="2017-03-13T14:30:54.583Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过Hexo与github搭建一个静态的个人博客">
+<meta name="twitter:description" content="通过Hexo与github搭建一个静态博客 | Sun&apos;s Blog">
+<meta name="twitter:image" content="http://cnfeat.qiniudn.com/1.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="SUN&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="SUN&#39;s blog" title="SUN&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="SUN&#39;s blog">SUN&#39;s blog</a></h1>
+				<h2 class="blog-motto">write something</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:sunhua-07.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/25/how-tob-build-a-blog/" title="通过Hexo与github搭建一个静态的个人博客" itemprop="url">通过Hexo与github搭建一个静态的个人博客</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="孙华" target="_blank" itemprop="author">孙华</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-25T11:52:38.000Z" itemprop="datePublished"> 发表于 2015-07-25</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装所需软件"><span class="toc-number">1.</span> <span class="toc-text">安装所需软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打开Git"><span class="toc-number">2.</span> <span class="toc-text">打开Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证Node-js是否安装成功"><span class="toc-number">3.</span> <span class="toc-text">验证Node.js是否安装成功</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册Github"><span class="toc-number">4.</span> <span class="toc-text">注册Github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置SSH-keys"><span class="toc-number">5.</span> <span class="toc-text">配置SSH keys</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#检查SSH-keys的设置"><span class="toc-number">5.1.</span> <span class="toc-text">检查SSH keys的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成新的SSH-Key："><span class="toc-number">5.2.</span> <span class="toc-text">生成新的SSH Key：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加SSH-Key到GitHub"><span class="toc-number">5.3.</span> <span class="toc-text">添加SSH Key到GitHub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">5.4.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置用户信息"><span class="toc-number">5.5.</span> <span class="toc-text">设置用户信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-Key配置成功"><span class="toc-number">5.6.</span> <span class="toc-text">SSH Key配置成功</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用GitHub-Pages建立博客"><span class="toc-number">6.</span> <span class="toc-text">使用GitHub Pages建立博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#github上建立仓库"><span class="toc-number">6.1.</span> <span class="toc-text">github上建立仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用Hexo克隆主题"><span class="toc-number">7.</span> <span class="toc-text">用Hexo克隆主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo介绍"><span class="toc-number">7.1.</span> <span class="toc-text">Hexo介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Hexo"><span class="toc-number">7.2.</span> <span class="toc-text">安装Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署Hexo"><span class="toc-number">7.3.</span> <span class="toc-text">部署Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装依赖包"><span class="toc-number">7.4.</span> <span class="toc-text">安装依赖包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地查看"><span class="toc-number">7.5.</span> <span class="toc-text">本地查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制博客的主题"><span class="toc-number">7.6.</span> <span class="toc-text">复制博客的主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启用博客的主题"><span class="toc-number">7.7.</span> <span class="toc-text">启用博客的主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新主题"><span class="toc-number">7.8.</span> <span class="toc-text">更新主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用与调试"><span class="toc-number">7.9.</span> <span class="toc-text">使用与调试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将独立域名与GitHub-Pages的空间绑定"><span class="toc-number">8.</span> <span class="toc-text">将独立域名与GitHub Pages的空间绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub-Pages的设置"><span class="toc-number">8.1.</span> <span class="toc-text">GitHub Pages的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS设置"><span class="toc-number">8.2.</span> <span class="toc-text">DNS设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#去Godaddy修改DNS地址"><span class="toc-number">8.3.</span> <span class="toc-text">去Godaddy修改DNS地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建完成"><span class="toc-number">9.</span> <span class="toc-text">搭建完成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶篇：Hexo设置"><span class="toc-number">10.</span> <span class="toc-text">进阶篇：Hexo设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改局部页面"><span class="toc-number">10.1.</span> <span class="toc-text">修改局部页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo命令"><span class="toc-number">10.2.</span> <span class="toc-text">Hexo命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发表新文章"><span class="toc-number">10.3.</span> <span class="toc-text">发表新文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用Hexo发表文章的Markdown语法"><span class="toc-number">10.4.</span> <span class="toc-text">用Hexo发表文章的Markdown语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装插件"><span class="toc-number">11.</span> <span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo上传README文件"><span class="toc-number">12.</span> <span class="toc-text">Hexo上传README文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#404页面"><span class="toc-number">13.</span> <span class="toc-text">404页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图床"><span class="toc-number">14.</span> <span class="toc-text">图床</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RSS插件"><span class="toc-number">15.</span> <span class="toc-text">RSS插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sitemap"><span class="toc-number">16.</span> <span class="toc-text">sitemap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料："><span class="toc-number">17.</span> <span class="toc-text">参考资料：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#感谢"><span class="toc-number">18.</span> <span class="toc-text">感谢</span></a></li></ol>
+		
+		</div>
+		
+		<p>这篇博客记录了我搭建我的个人博客的全过程。网络上有很多关于搭建个人博客的文章，但很多文章都不全，这里完整的记录了我搭建这儿静态博客的过程，希望可以帮助有相同需求的人。</p>
+<p>##前言<br>为什么要写博客，因为我想就下自己在学习和生活中的点点滴滴。以前学习很多东西，看一两遍就记住了。但是最近发现自己的记性没有以前好了，所以就想到了建个博客。一来可以把自己学习经验和生活感触写下来，二来是可以和大家分享自己的那么一点点有用的东西。</p>
+<p>为什么要开博客？可以看看cnFeat的这篇<a href="http://zhuanlan.zhihu.com/cnfeat/19743861" target="_blank" rel="external">《为什么你要写博客？》</a></p>
+<p>或者也可看看这篇文章<a href="http://zhuanlan.zhihu.com/cnfeat/19743255" target="_blank" rel="external">《我的博客时代》</a></p>
+<p>有人会问为什么要搭建一个属于自己的独立博客，网上有很多博客网站可以选择。答案很简单，一个独立的博客是真正属于自己的。</p>
+<p>##为什么选择hexo和Github Pages<br>很多人用wordpress，你为什么要用github pages来搭建？</p>
+<ol>
+<li>github pages有300M免费空间，资料自己管理，保存可靠；</li>
+<li>学着用github，享受github的便利，上面有很多大牛，眼界会开阔很多；</li>
+<li>顺便看看github工作原理，最好的团队协作流程；</li>
+<li>github是趋势；</li>
+<li>你不觉得一个文科生用github很geek吗？瞬间跻身技术界；</li>
+<li>就算github被墙了，我可以搬到国内的gitcafe中去。</li>
+</ol>
+<p>hexo可以帮助生成静态页面。</p>
+<p>##GitHub Pages是什么？<br>GitHub Pages本用于介绍托管在GitHub上的项目， 不过，由于他的空间免费稳定，用来做搭建一个博客再好不过了。</p>
+<blockquote>
+<p>github Pages可以被认为是用户编写的、托管在github上的静态网页。<br><img src="http://cnfeat.qiniudn.com/1.png" alt=""></p>
+</blockquote>
+<p>##购买域名<br>只推荐上godaddy购买，安全，而且可以使用支付宝。</p>
+<p>教程（截止至2014年5月10日）如下</p>
+<p><strong>1、查你想要的域名；</strong><br><img src="http://cnfeat.qiniudn.com/2.png" alt=""></p>
+<p><strong>2、查到适合的域名之后选择「continue to Cart」;</strong><br><img src="http://cnfeat.qiniudn.com/3.png" alt=""></p>
+<p><strong>3、godaddy附加收费服务，不要管，继续「continue to Cart」;</strong><br><img src="http://cnfeat.qiniudn.com/4.png" alt=""></p>
+<p><strong>4、确认购买。</strong>修改购买年限，默认是两年，可以修改成1/2/3/5/10年，随自己喜欢。现在godaddy上com每年的默认费用是12.99美元，附加上ICANN的管理费用就是13.17美元。<br><img src="http://cnfeat.qiniudn.com/5.png" alt=""><br>如果你不是土豪，可以上网搜godaddy的优惠码，一大堆，找一个填进这里，填完之后，一年的费用会变成8.99美元。<br><img src="http://cnfeat.qiniudn.com/61.png" alt=""></p>
+<p><strong>说明一下：</strong>一般来讲，使用网上的优惠码第一年收费8.99美元，以后每年的收费是10.99美元，不过在网上可以搜到合适的优惠码，可以每年的收费都是8.99美元，记得多测试自行鉴别。</p>
+<p>如图，我买了五年的费用就是45.85美元，随后点击「Proceed to Checkout」</p>
+<p><img src="http://cnfeat.qiniudn.com/6.png" alt=""></p>
+<p><strong>5、结算。</strong>登录或注册界面，填完必要的信息之后，选择用支付宝结算。<br><img src="http://cnfeat.qiniudn.com/7.png" alt=""><br>如果以上的教程如果不够清晰，可以参照这一份<a href="http://www.admin5.com/article/20131014/527495.shtml" target="_blank" rel="external">《2013年10月新版godaddy域名注册图文教程》</a>。</p>
+<p><strong>6、检查。</strong>结算后，重新登录，去「My Account」，域名已经显示在你的账户了。<br><img src="http://cnfeat.qiniudn.com/8.png" alt=""></p>
+<p><strong>7、补充一些注意事项：</strong></p>
+<p>–输入优惠码没有优惠或者优惠幅度较低，请清除浏览器cookies再尝试；<br>–如果没有支付宝支付选项，有可能是使用的优惠码不支持支付宝，请重新清除浏览器cookies再尝试；<br>–注册时用户填写信息时一定要输入正确的邮箱名字，否则修改十分麻烦。<br>–买完域名之后一定要记得去自己的邮箱查看激活邮件，否则域名激活不了。</p>
+<h2 id="安装所需软件"><a href="#安装所需软件" class="headerlink" title="安装所需软件"></a>安装所需软件</h2><p>安装下来软件：<br>–{Node.js](<a href="http://nodejs.org/" target="_blank" rel="external">http://nodejs.org/</a>)<br>–<a href="http://git-scm.com/" target="_blank" rel="external">Git</a></p>
+<h2 id="打开Git"><a href="#打开Git" class="headerlink" title="打开Git"></a>打开Git</h2><p>可以通过下面两种方式打开Git：<br>–Windows开始菜单的快捷方式it Bash<br>！<a href="http://cnfeat.qiniudn.com/9.jpg" target="_blank" rel="external"></a><br>–鼠标右键打开Git Bash<br><img src="http://cnfeat.qiniudn.com/s10.jpg" alt=""></p>
+<h2 id="验证Node-js是否安装成功"><a href="#验证Node-js是否安装成功" class="headerlink" title="验证Node.js是否安装成功"></a>验证Node.js是否安装成功</h2><p>在Windows下win+R打开运行，输入cmd回车<br><img src="" alt=""><br>打开命令行窗口<br><img src="" alt=""><br>在命令行窗口输入node回车，出现下面的提示表示安装成功<br><img src="" alt=""></p>
+<h2 id="注册Github"><a href="#注册Github" class="headerlink" title="注册Github"></a>注册Github</h2><p>访问：<a href="http://www.github.com" target="_blank" rel="external">www.github.com</a></p>
+<p>注册你的username和邮箱，邮箱十分重要，GitHub上很多通知都是通过邮箱的。</p>
+<p>注册过程比较简单，详细也可以看：<br><a href="http://pchou.info/web-build/2013/01/03/build-github-blog-page-01.html" target="_blank" rel="external">一步步在GitHub上创建博客主页全系列</a></p>
+<h2 id="配置SSH-keys"><a href="#配置SSH-keys" class="headerlink" title="配置SSH keys"></a>配置SSH keys</h2><p>要想让本地的给项目与在github上的项目联系，需要使用SSH keys。</p>
+<h3 id="检查SSH-keys的设置"><a href="#检查SSH-keys的设置" class="headerlink" title="检查SSH keys的设置"></a>检查SSH keys的设置</h3><p>首先我们需要检查你电脑上现有的ssh key：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> ~/.ssh   检查本机的ssh密钥</div></pre></td></tr></table></figure>
+<p>如果提示：No such file or directory 说明你是第一次使用git。</p>
+<h3 id="生成新的SSH-Key："><a href="#生成新的SSH-Key：" class="headerlink" title="生成新的SSH Key："></a>生成新的SSH Key：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"邮件地址@youremail.com"</span></div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;</div></pre></td></tr></table></figure>
+<p>注意1: 此处的邮箱地址，你可以输入自己的邮箱地址；注意2: 此处的「-C」的是大写的「C」</p>
+<p>然后系统会要你输入密码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):&lt;输入加密串&gt;</div><div class="line">Enter same passphrase again:&lt;再次输入加密串&gt;</div></pre></td></tr></table></figure>
+<p>在回车中会提示你输入一个密码，这个密码会在你提交项目时使用，如果为空的话提交项目时则不用输入。这个设置是防止别人往你的项目里提交内容。</p>
+<p>注意：输入密码的时候没有*字样的，你直接输入就可以了。</p>
+<p>最后看到这样的界面，就成功设置ssh key了：<br><img src="http://cnfeat.qiniudn.com/11.png" alt=""></p>
+<h3 id="添加SSH-Key到GitHub"><a href="#添加SSH-Key到GitHub" class="headerlink" title="添加SSH Key到GitHub"></a>添加SSH Key到GitHub</h3><p>在本机设置SSH Key之后，需要添加到GitHub上，以完成SSH链接的设置。</p>
+<p>–打开本地C:\Documents and Settings\Administrator.ssh\id_rsa.pub文件。此文件里面内容为刚才生成人密钥。如果看不到这个文件，你需要设置显示隐藏文件。准确的复制这个文件的内容，才能保证设置的成功。</p>
+<p>–登陆github系统。点击右上角的 Account Settings—-&gt;SSH Public keys —-&gt; add another public keys</p>
+<p>–把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了<br><img src="http://cnfeat.qiniudn.com/s12.jpg" alt=""></p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>可以输入下面的命令，看看设置是否成功，git@github.com的部分不要修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div></pre></td></tr></table></figure></p>
+<p>如果是下面的反馈：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">The authenticity of host <span class="string">'github.com (207.97.227.239)'</span> can<span class="string">'t be established.</span></div><div class="line">RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.</div><div class="line">Are you sure you want to continue connecting (yes/no)?</div></pre></td></tr></table></figure></p>
+<p>不要紧张，输入yes就好，然后会看到：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hi cnfeat! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></div></pre></td></tr></table></figure></p>
+<h3 id="设置用户信息"><a href="#设置用户信息" class="headerlink" title="设置用户信息"></a>设置用户信息</h3><p>现在你已经可以通过SSH链接到GitHub了，还有一些个人信息需要完善的。</p>
+<p>Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信息来做权限的处理，输入下面的代码进行个人信息的设置，把名称和邮箱替换成你自己的，名字必须是你的真名，而不是GitHub的昵称。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"cnfeat"</span>//用户名</div><div class="line">$ git config --global user.email  <span class="string">"cnfeat@gmail.com"</span>//填写自己的邮箱</div></pre></td></tr></table></figure></p>
+<h3 id="SSH-Key配置成功"><a href="#SSH-Key配置成功" class="headerlink" title="SSH Key配置成功"></a>SSH Key配置成功</h3><p>本机已成功连接到github。</p>
+<p>若有问题，请重新设置。常见错误请参考：</p>
+<p><a href="http://help.github.com/articles/generating-ssh-keys" target="_blank" rel="external">GitHub Help - Generating SSH Keys</a></p>
+<p><a href="http://help.github.com/articles/error-permission-denied-publickey" target="_blank" rel="external">GitHub Help - Error Permission denied (publickey)</a></p>
+<h2 id="使用GitHub-Pages建立博客"><a href="#使用GitHub-Pages建立博客" class="headerlink" title="使用GitHub Pages建立博客"></a>使用GitHub Pages建立博客</h2><p>与GitHub建立好链接之后，就可以方便的使用它提供的Pages服务，GitHub Pages分两种，一种是你的GitHub用户名建立的username.github.io这样的用户&amp;组织页（站），另一种是依附项目的pages。</p>
+<p>想建立个人博客是用的第一种，形如<a href="https://suen427.github.io" target="_blank" rel="external">suen427.github.io</a>这样的可访问的站，每个用户名下面只能建立一个。</p>
+<h3 id="github上建立仓库"><a href="#github上建立仓库" class="headerlink" title="github上建立仓库"></a>github上建立仓库</h3><p>登录后系统，在github首页，点击页面右下角「New Repository」<br><img src="http://cnfeat.qiniudn.com/13.png" alt=""><br>填写项目信息：</p>
+<p><strong>project name：</strong>cnfeat.github.io</p>
+<p><strong>description：</strong> Sun’s Blog</p>
+<p>注：Github Pages的Repository名字是特定的，比如我Github账号是suen427，那么我Github Pages Repository名字就是suen427.github.io。<br>点击「Create Repository」完成创建。</p>
+<p>详细可以看这里：<a href="http://pchou.info/web-build/2013/01/05/build-github-blog-page-02.html" target="_blank" rel="external">一步步在GitHub上创建博客主页(2)</a></p>
+<h2 id="用Hexo克隆主题"><a href="#用Hexo克隆主题" class="headerlink" title="用Hexo克隆主题"></a>用Hexo克隆主题</h2><h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo的作者是<a href="https://github.com/tommy351/hexo" target="_blank" rel="external">tommy351</a>，根据<a href="http://hexo.io/docs/index.html" target="_blank" rel="external">官方介绍</a>，Hexo是一个简单、快速、强大的博客发布工具，支持Markdown格式。</p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>利用 npm 命令即可安装。(在任意位置点击鼠标右键，选择Git bash)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo</div></pre></td></tr></table></figure></p>
+<h3 id="部署Hexo"><a href="#部署Hexo" class="headerlink" title="部署Hexo"></a>部署Hexo</h3><p>安装完成后，在你喜爱的文件夹下（如<code>H:\hexo</code>），执行以下指令(在<code>H:\hexo</code>内点击鼠标右键，选择Git bash)，Hexo 即会自动在目标文件夹建立网站所需要的所有文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo init</div></pre></td></tr></table></figure></p>
+<h3 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install</div></pre></td></tr></table></figure>
+<h3 id="本地查看"><a href="#本地查看" class="headerlink" title="本地查看"></a>本地查看</h3><p>现在我们已经搭建起本地的hexo博客了，执行以下命令(在<code>H:\hexo</code>)，然后到浏览器输入<code>localhost:4000</code>看看。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div><div class="line">$ hexo server</div></pre></td></tr></table></figure></p>
+<h3 id="复制博客的主题"><a href="#复制博客的主题" class="headerlink" title="复制博客的主题"></a>复制博客的主题</h3><p>建立了Hexo文件之后复制wuchong的修改的主题，我的就是复制他的修改的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/wuchong/jacman.git themes/jacman</div></pre></td></tr></table></figure></p>
+<p>或者复制yangjian的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/A-limon/pacman.git themes/pacman</div></pre></td></tr></table></figure></p>
+<h3 id="启用博客的主题"><a href="#启用博客的主题" class="headerlink" title="启用博客的主题"></a>启用博客的主题</h3><p>修改<code>Hexo</code>目录下的<code>_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">theme: jacman</div></pre></td></tr></table></figure></p>
+<p>注意：Hexo有两个<code>_config.yml</code>文件，一个在根目录，一个在<code>theme</code>下，此时修改的是在根目录下的。</p>
+<h3 id="更新主题"><a href="#更新主题" class="headerlink" title="更新主题"></a>更新主题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> themes/jacman</div><div class="line">$ git pull</div></pre></td></tr></table></figure>
+<p>注意：为避免出错，请先备份你的<code>_config.yml</code>文件后再升级。</p>
+<h3 id="使用与调试"><a href="#使用与调试" class="headerlink" title="使用与调试"></a>使用与调试</h3><p>在本地如果需要预览或者调试你的博客，可以启动本地服务器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo serve</div></pre></td></tr></table></figure></p>
+<p>部署到Github前需要配置<code>_config.yml</code>文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line"><span class="built_in">type</span>: github</div><div class="line">repository: git@github.com:suen427/suen427.github.io.git</div><div class="line">branch: master</div></pre></td></tr></table></figure></p>
+<p>如果你是为一个项目制作网站，那么需要把branch设置为gh-pages。若要绑定自定义域名也可以参考Hexo或Github Page的帮助文档，制作一个cname文件。</p>
+<p>之后执行下列指令即可完成部署，注意部署会覆盖掉你之前在版本库中存放的文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo generate</div><div class="line">$ hexo deploy</div></pre></td></tr></table></figure></p>
+<h2 id="将独立域名与GitHub-Pages的空间绑定"><a href="#将独立域名与GitHub-Pages的空间绑定" class="headerlink" title="将独立域名与GitHub Pages的空间绑定"></a>将独立域名与GitHub Pages的空间绑定</h2><h3 id="GitHub-Pages的设置"><a href="#GitHub-Pages的设置" class="headerlink" title="GitHub Pages的设置"></a>GitHub Pages的设置</h3><p>方法一：在Repository的根目录下面，新建一个名为CNAME的文本文件，里面写入你要绑定的域名，比如suen427.com。</p>
+<p>方法二：到我的github仓库，点击右下角的「Download ZIP」，下载源文件，解压，找到CNAME文件，用记事本打开，将suen427.com修改成你的域名，放进Hexo\source目录下，用hexo命令提交上去。</p>
+<h3 id="DNS设置"><a href="#DNS设置" class="headerlink" title="DNS设置"></a>DNS设置</h3><p>用DNSpod，快，免费，稳定。</p>
+<p>注册DNSpod，添加域名，如下图设置。<br><img src="http://cnfeat.qiniudn.com/15.png" alt=""></p>
+<p>其中A的两条记录指向的ip地址是github Pages的提供的ip</p>
+<p>-192.30.252.153<br>-192.30.252.154</p>
+<p>如博客不能登录，有可能是github更改了空间服务的ip地址，记得及时到在<a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages" target="_blank" rel="external">GitHub Pages</a>查看最新的ip即可</p>
+<p>www指定的记录是你在github注册的仓库。</p>
+<h3 id="去Godaddy修改DNS地址"><a href="#去Godaddy修改DNS地址" class="headerlink" title="去Godaddy修改DNS地址"></a>去Godaddy修改DNS地址</h3><p>更改godaddy的Nameservers为DNSpod的NameServers。<br><img src="http://cnfeat.qiniudn.com/16.png" alt=""><br>1、点击「My Account」，管理我的域名。<br><img src="http://cnfeat.qiniudn.com/17.jpg" alt=""><br>2、点击域名。<br><img src="http://cnfeat.qiniudn.com/18.jpg" alt=""><br>3、将godaddy的Nameservers更改成f1g1ns1.dnspod.net和f1g1ns2.dnspod.net<br><img src="http://cnfeat.qiniudn.com/19.jpg" alt=""><br>如有不详看可以看<a href="https://support.dnspod.cn/Kb/showarticle/tsid/42/" target="_blank" rel="external">DNSpod提供的官方帮助</a></p>
+<p>详细也可以看这里：<a href="http://pchou.info/web-build/2013/01/05/build-github-blog-page-03.html" target="_blank" rel="external">一步步在GitHub上创建博客主页(3)</a></p>
+<h2 id="搭建完成"><a href="#搭建完成" class="headerlink" title="搭建完成"></a>搭建完成</h2><p>至此，独立博客就算搭建完成，如需进步一完善请在参看以下文章或博客下留言。</p>
+<p><a href="http://yangjian.me/workspace/introducing-pacman-theme/" target="_blank" rel="external">Pacman主题介绍</a> by yangjian</p>
+<p><a href="http://yangjian.me/workspace/building-blog-with-hexo/" target="_blank" rel="external">使用hexo搭建博客</a> by yangjian</p>
+<p><a href="http://zipperary.com/2013/05/28/hexo-guide-2/" target="_blank" rel="external">hexo系列教程：（二）搭建hexo博客</a> by zippera（推荐）</p>
+<p><a href="http://zipperary.com/2013/05/29/hexo-guide-3/" target="_blank" rel="external">hexo系列教程：（三）hexo博客的配置、使用</a> by zippera（推荐）</p>
+<h2 id="进阶篇：Hexo设置"><a href="#进阶篇：Hexo设置" class="headerlink" title="进阶篇：Hexo设置"></a>进阶篇：Hexo设置</h2><p>网站搭建完成后，就可以根据自己爱好来对Hexo生成的网站进行设置了，对整站的设置，只要修改项目目录的<code>_config.yml</code>就可以了，这是我的设置，可供参考。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Hexo Configuration</span></div><div class="line"><span class="comment">## Docs: http://hexo.io/docs/configuration.html</span></div><div class="line"><span class="comment">## Source: https://github.com/hexojs/hexo/</span></div><div class="line"></div><div class="line"><span class="comment"># Site #整站的基本信息</span></div><div class="line">title: Sun<span class="string">'s Blog #网站标题</span></div><div class="line">subtitle: 记录学习成长的点点滴滴  #网站副标题</div><div class="line">description: 个人博客 学习分享 笔记 随笔 #网站描述</div><div class="line">author: Sun #网站作者</div><div class="line">email: suen427@gmail.com #联系邮箱</div><div class="line">language: zh-CN #网站语言</div><div class="line">timezone: Asia/Shanghai #时区</div><div class="line"></div><div class="line"># URL</div><div class="line">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child<span class="string">' and root as '</span>/child/<span class="string">'</span></div><div class="line">url: http://suen427.github.io #你的域名</div><div class="line">root: /</div><div class="line">permalink: :year/:month/:day/:title/</div><div class="line">permalink_defaults:</div><div class="line"></div><div class="line"># Directory</div><div class="line">source_dir: source</div><div class="line">public_dir: public</div><div class="line">tag_dir: tags</div><div class="line">archive_dir: archives</div><div class="line">category_dir: categories</div><div class="line">code_dir: downloads/code</div><div class="line">i18n_dir: :lang</div><div class="line">skip_render:</div><div class="line"></div><div class="line"># Writing</div><div class="line">new_post_name: :title.md # File name of new posts</div><div class="line">default_layout: post</div><div class="line">titlecase: false # Transform title into titlecase</div><div class="line">external_link: true # Open external links in new tab</div><div class="line">filename_case: 0</div><div class="line">render_drafts: false</div><div class="line">post_asset_folder: false</div><div class="line">relative_link: false</div><div class="line">future: true</div><div class="line">highlight:</div><div class="line">  enable: true</div><div class="line">  line_number: true</div><div class="line">  auto_detect: true</div><div class="line">  tab_replace:</div><div class="line"></div><div class="line"># Category &amp; Tag</div><div class="line">default_category: uncategorized</div><div class="line">category_map:</div><div class="line">tag_map:</div><div class="line"></div><div class="line"># Archives</div><div class="line">## 2: Enable pagination</div><div class="line">## 1: Disable pagination</div><div class="line">## 0: Fully Disable</div><div class="line">archive: 2</div><div class="line">category: 2</div><div class="line">tag: 2</div><div class="line"></div><div class="line"># Date / Time format</div><div class="line">## Hexo uses Moment.js to parse and display date</div><div class="line">## You can customize the date format as defined in</div><div class="line">## http://momentjs.com/docs/#/displaying/format/</div><div class="line">date_format: YYYY-MM-DD</div><div class="line">time_format: HH:mm:ss</div><div class="line"></div><div class="line"># Pagination</div><div class="line">## Set per_page to 0 to disable pagination</div><div class="line">per_page: 10</div><div class="line">pagination_dir: page</div><div class="line"></div><div class="line"># Extensions</div><div class="line">## Plugins: https://github.com/tommy351/hexo/wiki/Plugins</div><div class="line">## Themes: https://github.com/tommy351/hexo/wiki/Themes</div><div class="line">theme: jacman</div><div class="line">plugins:</div><div class="line">- hexo-generator-feed</div><div class="line">- hexo-generator-sitemap</div><div class="line"></div><div class="line">#Feed Atom</div><div class="line">feed:</div><div class="line">  type: atom</div><div class="line">  path: atom.xml</div><div class="line">  limit: 20</div><div class="line"></div><div class="line"># Markdown</div><div class="line">## https://github.com/chjj/marked</div><div class="line">markdown:</div><div class="line">  gfm: true</div><div class="line">  pedantic: false</div><div class="line">  sanitize: false</div><div class="line">  tables: true</div><div class="line">  breaks: true</div><div class="line">  smartLists: true</div><div class="line">  smartypants: true</div><div class="line"></div><div class="line"># Stylus</div><div class="line">stylus:</div><div class="line">  compress: false</div><div class="line"></div><div class="line"># Deployment</div><div class="line">## Docs: http://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: git@github.com:suen427/suen427.github.io.git</div></pre></td></tr></table></figure>
+<h3 id="修改局部页面"><a href="#修改局部页面" class="headerlink" title="修改局部页面"></a>修改局部页面</h3><p>页面展现的全部逻辑都在每个主题中控制，源代码在hexo\themes\jacman\中：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── languages  <span class="comment">#多语言</span></div><div class="line">|   ├── default.yml<span class="comment">#默认语言</span></div><div class="line">|   └── zh-CN.yml  <span class="comment">#中文语言</span></div><div class="line">├── layout <span class="comment">#布局，根目录下的*.ejs文件是对主页，分页，存档等的控制</span></div><div class="line">|   ├── _partial   <span class="comment">#局部的布局，此目录下的*.ejs是对头尾等局部的控制</span></div><div class="line">|   └── _widget<span class="comment">#小挂件的布局，页面下方小挂件的控制</span></div><div class="line">├── <span class="built_in">source</span> <span class="comment">#源码</span></div><div class="line">|   ├── css<span class="comment">#css源码 </span></div><div class="line">|   |   ├── _base  <span class="comment">#*.styl基础css</span></div><div class="line">|   |   ├── _partial   <span class="comment">#*.styl局部css</span></div><div class="line">|   |   ├── fonts  <span class="comment">#字体</span></div><div class="line">|   |   ├── images <span class="comment">#图片</span></div><div class="line">|   |   └── style.styl <span class="comment">#*.styl引入需要的css源码</span></div><div class="line">|   ├── fancybox   <span class="comment">#fancybox效果源码</span></div><div class="line">|   └── js <span class="comment">#javascript源代码</span></div><div class="line">├── _config.yml<span class="comment">#主题配置文件</span></div><div class="line">└── README.md  <span class="comment">#用GitHub的都知道</span></div></pre></td></tr></table></figure></p>
+<h3 id="Hexo命令"><a href="#Hexo命令" class="headerlink" title="Hexo命令"></a>Hexo命令</h3><p>常用命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hexo new <span class="string">"postName"</span> <span class="comment">#新建文章</span></div><div class="line">hexo new page <span class="string">"pageName"</span> <span class="comment">#新建页面</span></div><div class="line">hexo generate <span class="comment">#生成静态页面至public目录</span></div><div class="line">hexo server <span class="comment">#开启预览访问端口（默认端口4000，'ctrl + c'关闭server）</span></div><div class="line">hexo deploy <span class="comment">#将.deploy目录部署到GitHub</span></div></pre></td></tr></table></figure></p>
+<p>简写：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo n == hexo new</div><div class="line">hexo g == hexo generate</div><div class="line">hexo s == hexo server</div><div class="line">hexo d == hexo deploy</div></pre></td></tr></table></figure></p>
+<p>常用复合命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo d -g <span class="comment">#生成加部署</span></div><div class="line">hexo s -g <span class="comment">#预览加部署</span></div></pre></td></tr></table></figure></p>
+<h3 id="发表新文章"><a href="#发表新文章" class="headerlink" title="发表新文章"></a>发表新文章</h3><p>用hexo发表新文章<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo n <span class="comment">#写文章</span></div></pre></td></tr></table></figure></p>
+<p>其中my new post为文章标题，执行命令后，会在项目\source_posts中生成my new post.md文件，用编辑器打开编写即可。</p>
+<p>当然，也可以直接在\source_posts中新建一个md文件。</p>
+<p>写完后，推送到服务器上，执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g <span class="comment">#生成</span></div><div class="line">$ hexo d <span class="comment">#部署 # 可与hexo g合并为 hexo d -g</span></div></pre></td></tr></table></figure></p>
+<h3 id="用Hexo发表文章的Markdown语法"><a href="#用Hexo发表文章的Markdown语法" class="headerlink" title="用Hexo发表文章的Markdown语法"></a>用Hexo发表文章的Markdown语法</h3><p>使用jacman或pacman主题，建议按此标准语法写：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">title: postName <span class="comment">#文章页面上的显示名称，可以任意修改，不会出现在URL中</span></div><div class="line">date: 2013-12-02 15:30:16 <span class="comment">#文章生成时间，一般不改，当然也可以任意修改</span></div><div class="line">categories: example <span class="comment">#分类</span></div><div class="line">tags: [tag1,tag2,tag3] <span class="comment">#文章标签，可空，多标签请用格式，注意:后面有个空格</span></div><div class="line">description: 附加一段文章摘要，字数最好在140字以内。</div><div class="line">---</div><div class="line"></div><div class="line">以下正文</div></pre></td></tr></table></figure></p>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>添加sitemap和feed插件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-generator-sitemap</div><div class="line">$ npm install hexo-generator-feed</div></pre></td></tr></table></figure></p>
+<p>修改<code>_config.yml</code>，增加以下内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Extensions</span></div><div class="line">Plugins:</div><div class="line">- hexo-generator-feed</div><div class="line">- hexo-generator-sitemap</div><div class="line"></div><div class="line"><span class="comment">#Feed Atom</span></div><div class="line">feed:</div><div class="line">  <span class="built_in">type</span>: atom</div><div class="line">  path: atom.xml</div><div class="line">  <span class="built_in">limit</span>: 20</div><div class="line"></div><div class="line"><span class="comment">#sitemap</span></div><div class="line">sitemap:</div><div class="line">  path: sitemap.xml</div></pre></td></tr></table></figure></p>
+<h2 id="Hexo上传README文件"><a href="#Hexo上传README文件" class="headerlink" title="Hexo上传README文件"></a>Hexo上传README文件</h2><p>Github的版本库通常建议同时附上README.md说明文件，但是hexo默认情况下会把所有md文件解析成html文件，所以即使你在线生成了README.md，它也会在你下一次部署时被删去。怎么解决呢？</p>
+<p>在执行hexo deploy前把在本地写好的README.md文件复制到<code>public</code>文件夹中，再去执行<code>hexo deploy</code>。</p>
+<h2 id="404页面"><a href="#404页面" class="headerlink" title="404页面"></a>404页面</h2><p>GitHub Pages有提供制作404页面的指引：<a href="https://help.github.com/articles/custom-404-pages" target="_blank" rel="external">Custom 404 Pages</a>。</p>
+<p>直接在根目录下创建自己的404.html或者404.md就可以。但是自定义404页面仅对绑定顶级域名的项目才起作用，GitHub默认分配的二级域名是不起作用的，使用hexo server在本机调试也是不起作用的。</p>
+<h2 id="图床"><a href="#图床" class="headerlink" title="图床"></a>图床</h2><p>推荐使用七牛（10G空间，免费）。</p>
+<h2 id="RSS插件"><a href="#RSS插件" class="headerlink" title="RSS插件"></a>RSS插件</h2><p>hexo提供了RSS的生成插件，需要手动安装和设置。使用插件 <code>hexo-generator-feed</code> 能生成 <code>Atom 1.0</code> 或者 <code>RSS 2.0 feed</code>. 安装很简单<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-generator-feed --save</div></pre></td></tr></table></figure></p>
+<p>然后在 <code>Hexo</code> 根目录下的 <code>_config.yml</code> 里配置一下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">feed:</div><div class="line">    <span class="built_in">type</span>: atom</div><div class="line">    path: atom.xml</div><div class="line">    <span class="built_in">limit</span>: 20</div></pre></td></tr></table></figure></p>
+<p>-type 表示类型, 是 atom 还是 rss2.<br>-path 表示 Feed 路径<br>-limit 最多多少篇最近文章</p>
+<h2 id="sitemap"><a href="#sitemap" class="headerlink" title="sitemap"></a>sitemap</h2><p>同样的，我们使用插件 hexo-generator-sitemap 能生成站点地图, 方法如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-generator-sitemap --save</div></pre></td></tr></table></figure></p>
+<p>然后在 <code>Hexo</code> 根目录下的 <code>_config.yml</code> 里配置一下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sitemap:</div><div class="line">    path: sitemap.xml</div></pre></td></tr></table></figure></p>
+<p>-path 表示 Sitemap 的路径. 默认为 sitemap.xml.<br>对于国内用户还需要安装插件 hexo-generator-baidu-sitemap, 顾名思义是为百度量身打造的. 安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-generator-baidu-sitemap --save</div></pre></td></tr></table></figure></p>
+<p>然后在 Hexo 根目录下的 _config.yml 里配置一下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">baidusitemap:</div><div class="line">    path: baidusitemap.xml</div></pre></td></tr></table></figure></p>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p>[1]<a href="http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/" target="_blank" rel="external">如何搭建一个独立博客——简明Github Pages与Hexo教程</a><br>[2]<a href="http://lukang.me/2015/optimization-of-hexo-2.html" target="_blank" rel="external">Hexo 优化与定制(二)</a><br>[3]<a href="http://zipperary.com/2013/05/28/hexo-guide-2/" target="_blank" rel="external">hexo系列教程：（二）搭建hexo博客</a></p>
+<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p><a href="http://cnfeat.com/" target="_blank" rel="external">cnFeat</a></p>
+<p><a href="http://wuchong.me/" target="_blank" rel="external">wuchong</a></p>
+<p><a href="http://yangjian.me/" target="_blank" rel="external">yangjian</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/建站/">建站</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Hexo/">Hexo</a><a href="/tags/github/">github</a><a href="/tags/博客/">博客</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://sunhua-07.github.io/2015/07/25/how-tob-build-a-blog/" data-title="通过Hexo与github搭建一个静态的个人博客 | SUN&#39;s blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装所需软件"><span class="toc-number">1.</span> <span class="toc-text">安装所需软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打开Git"><span class="toc-number">2.</span> <span class="toc-text">打开Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证Node-js是否安装成功"><span class="toc-number">3.</span> <span class="toc-text">验证Node.js是否安装成功</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册Github"><span class="toc-number">4.</span> <span class="toc-text">注册Github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置SSH-keys"><span class="toc-number">5.</span> <span class="toc-text">配置SSH keys</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#检查SSH-keys的设置"><span class="toc-number">5.1.</span> <span class="toc-text">检查SSH keys的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成新的SSH-Key："><span class="toc-number">5.2.</span> <span class="toc-text">生成新的SSH Key：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加SSH-Key到GitHub"><span class="toc-number">5.3.</span> <span class="toc-text">添加SSH Key到GitHub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">5.4.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置用户信息"><span class="toc-number">5.5.</span> <span class="toc-text">设置用户信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-Key配置成功"><span class="toc-number">5.6.</span> <span class="toc-text">SSH Key配置成功</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用GitHub-Pages建立博客"><span class="toc-number">6.</span> <span class="toc-text">使用GitHub Pages建立博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#github上建立仓库"><span class="toc-number">6.1.</span> <span class="toc-text">github上建立仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用Hexo克隆主题"><span class="toc-number">7.</span> <span class="toc-text">用Hexo克隆主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo介绍"><span class="toc-number">7.1.</span> <span class="toc-text">Hexo介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Hexo"><span class="toc-number">7.2.</span> <span class="toc-text">安装Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署Hexo"><span class="toc-number">7.3.</span> <span class="toc-text">部署Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装依赖包"><span class="toc-number">7.4.</span> <span class="toc-text">安装依赖包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地查看"><span class="toc-number">7.5.</span> <span class="toc-text">本地查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制博客的主题"><span class="toc-number">7.6.</span> <span class="toc-text">复制博客的主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启用博客的主题"><span class="toc-number">7.7.</span> <span class="toc-text">启用博客的主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新主题"><span class="toc-number">7.8.</span> <span class="toc-text">更新主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用与调试"><span class="toc-number">7.9.</span> <span class="toc-text">使用与调试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将独立域名与GitHub-Pages的空间绑定"><span class="toc-number">8.</span> <span class="toc-text">将独立域名与GitHub Pages的空间绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub-Pages的设置"><span class="toc-number">8.1.</span> <span class="toc-text">GitHub Pages的设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS设置"><span class="toc-number">8.2.</span> <span class="toc-text">DNS设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#去Godaddy修改DNS地址"><span class="toc-number">8.3.</span> <span class="toc-text">去Godaddy修改DNS地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建完成"><span class="toc-number">9.</span> <span class="toc-text">搭建完成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶篇：Hexo设置"><span class="toc-number">10.</span> <span class="toc-text">进阶篇：Hexo设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改局部页面"><span class="toc-number">10.1.</span> <span class="toc-text">修改局部页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo命令"><span class="toc-number">10.2.</span> <span class="toc-text">Hexo命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发表新文章"><span class="toc-number">10.3.</span> <span class="toc-text">发表新文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用Hexo发表文章的Markdown语法"><span class="toc-number">10.4.</span> <span class="toc-text">用Hexo发表文章的Markdown语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装插件"><span class="toc-number">11.</span> <span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo上传README文件"><span class="toc-number">12.</span> <span class="toc-text">Hexo上传README文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#404页面"><span class="toc-number">13.</span> <span class="toc-text">404页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图床"><span class="toc-number">14.</span> <span class="toc-text">图床</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RSS插件"><span class="toc-number">15.</span> <span class="toc-text">RSS插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sitemap"><span class="toc-number">16.</span> <span class="toc-text">sitemap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料："><span class="toc-number">17.</span> <span class="toc-text">参考资料：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#感谢"><span class="toc-number">18.</span> <span class="toc-text">感谢</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/建站/" title="建站">建站<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="孙华">孙华</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
