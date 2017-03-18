@@ -7,7 +7,7 @@
     <title>SUN&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
-    <meta name="author" content="孙华">
+    <meta name="author" content="hua">
     
 
     
@@ -78,11 +78,11 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/14/如何实现高效的js动画/" title="如何实现高效的js动画" itemprop="url">如何实现高效的js动画</a>
+      <a href="/2017/03/14/如何实现高效的js动画/" title="css animation还是js animation" itemprop="url">css animation还是js animation</a>
   </h1>
   <p class="article-author">By
        
-		<a href="/about" title="孙华" target="_blank" itemprop="author">孙华</a>
+		<a href="/about" title="hua" target="_blank" itemprop="author">hua</a>
 		
   <p class="article-time">
     <time datetime="2017-03-14T13:30:07.000Z" itemprop="datePublished"> 发表于 2017-03-14</time>
@@ -91,8 +91,34 @@
 </header>
     <div class="article-content">
         
-        <p>现在浏览器对<code>css animation</code>和<code>css transition</code>的支持已经很好了。那么我们为什么还要用js来实现动画呢？<br>–我觉得首先是js实现动画有更好的兼容性，现在还是有许多页面需要兼容ie8等比较老的浏览器。<br>–另外就是使用js实现，我们可以更好的控制整个动画。比如我们可以通过js来暂停动画，而css animation则不行。</p>
-<h2 id="那么如何实现高效的js动画呢？这里有两条原则："><a href="#那么如何实现高效的js动画呢？这里有两条原则：" class="headerlink" title="那么如何实现高效的js动画呢？这里有两条原则："></a>那么如何实现高效的js动画呢？这里有两条原则：</h2><p>1) synchronize the DOM → tween stack to minimize layout thrashing, and<br>2) cache values to minimize DOM querying.</p>
+        <p>现在浏览器对<code>css animation</code>和<code>css transition</code>的支持已经很好了。那么我们为什么还要用js来实现动画呢？</p>
+<ul>
+<li>我觉得首先是js实现动画有更好的兼容性，现在还是有许多页面需要兼容ie8等比较老的浏览器。</li>
+<li>另外就是使用js实现，我们可以更好的控制整个动画。比如我们可以通过js来暂停动画，而css animation则不行。</li>
+<li>还有一点就是css transition会强制使用GPU硬件加速，导致stuttering，详情参考</li>
+</ul>
+<p>那么如何实现高效的js动画呢？这里有<a href="https://davidwalsh.name/css-js-animation" target="_blank" rel="external">四条原则</a>：</p>
+<blockquote>
+<ol>
+<li>Synchronizing the DOM → tween stack across the entirety of the animation chain in order to minimize layout thrashing.</li>
+<li>Caching property values across chained calls in order to minimize the occurrence of DOM querying (which is the Achilles’ heel of performant DOM animation).</li>
+<li>Caching unit conversion ratios (e.g. px to %, em, etc.) across sibling elements in the same call.</li>
+<li>Skipping style updating when updates would be visually imperceptible.</li>
+</ol>
+</blockquote>
+<p>我对四条规则的理解：</p>
+<ol>
+<li>在同步DOM的补间操作时最小化布局的抖动。 我的理解就是使用高效的css样式。比如在页面中移动某个element的时候，<br>最简单的方法就是使用<code>top</code>或者<code>left</code>属性。但是这样做是不高效的，因为每次改变元素的<code>top</code>或者<code>left</code>值，都会让浏览器强制重新计算布局（layout）<br>，这是很费费计算开销的操作。而高效的操作时使用<code>transform</code>属性，他可以避免不必要的重新布局，而且会使用GPU的硬件加速。<br><a href="https://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/" target="_blank" rel="external">详情参见</a></li>
+<li><p>缓存一些数值以最小化DOM查询，这是因为DOM查询的开销一般也是比较大的（DOM查询是DOM动画的阿喀琉斯之踵）。对原文中<code>chained calls</code>的理解，<br>我觉得是在补间动画中的操作。最好将DOM查询的顺序放在最前面，最后统一设置样式，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//错误的做法：</span></div><div class="line"><span class="keyword">var</span> ele = <span class="built_in">document</span>.getElemtById(eleId);</div><div class="line"><span class="keyword">var</span> top = <span class="built_in">parseInt</span>(ele.style.top);</div><div class="line">ele.style.top = top + <span class="number">10</span> + <span class="string">'px'</span>;</div><div class="line"><span class="keyword">var</span> left = <span class="built_in">parseInt</span>(ele.style.left);</div><div class="line">ele.style.left = left + <span class="number">10</span> + <span class="string">'px'</span>;</div><div class="line"></div><div class="line"><span class="comment">//正确的做法：</span></div><div class="line"><span class="keyword">var</span> ele = <span class="built_in">document</span>.getElemtById(eleId);</div><div class="line"><span class="comment">//先查询</span></div><div class="line"><span class="keyword">var</span> top = <span class="built_in">parseInt</span>(ele.style.top);</div><div class="line"><span class="keyword">var</span> left = <span class="built_in">parseInt</span>(ele.style.left);</div><div class="line"><span class="comment">//再设置</span></div><div class="line">ele.style.left = left + <span class="number">10</span> + <span class="string">'px'</span>;</div><div class="line">ele.style.top = top + <span class="number">10</span> + <span class="string">'px'</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在同一次调用中，跨元素缓存单位转化比例。</p>
+</li>
+<li>忽略不可察觉的样式变化。</li>
+<li>自己补充一点，使用<code>requestAnimationFrame</code>替代<code>setTimeout</code>和<code>setInterval</code>。</li>
+</ol>
+<h3 id="回到文章主题，是选择css-animation还是js-animation？"><a href="#回到文章主题，是选择css-animation还是js-animation？" class="headerlink" title="回到文章主题，是选择css animation还是js animation？"></a>回到文章主题，是选择css animation还是js animation？</h3><p>对于简单的、不需要过多控制的动画需求且对浏览器要求不高可以使用纯css animation。<br>如果对浏览器兼容性要求较高，或者对动画的控制比较多，那么建议使用js 动画。<br>这里推荐两个库，一个是纯css动画库：<a href="https://github.com/daneden/animate.css" target="_blank" rel="external">animation.css</a>，这个库实有许多动css画效果。<br>另外一个是js动画插件：<a href="https://github.com/julianshapiro/velocity" target="_blank" rel="external">velocity.js</a>.velocity.js实现了jquery中的所有动画效果，<br>但是性能比jquery动画要好许多，而且可以不依赖jquery。</p>
+<p>附上一个css属性支持检测方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* cssDetect(cssName)</span></div><div class="line"> *     cssName: 需要检测的css属性值</div><div class="line"> *     renturn: 如果不支持对应的css属性返回：false</div><div class="line"> *         如果支持，则返回支持的css属性名，放回的属性名可能带厂商前缀（webkit或moz）</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> cssDetect = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> CSSprefix = <span class="string">"webkit,moz"</span>.split(<span class="string">","</span>),</div><div class="line">        d = create(<span class="string">"div"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">prop</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> Uprop = prop.charAt(<span class="number">0</span>).toUpperCase() + prop.substr(<span class="number">1</span>),</div><div class="line">            All = (prop + <span class="string">' '</span> + CSSprefix.join(Uprop + <span class="string">' '</span>) + Uprop).split(<span class="string">' '</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> n = <span class="number">0</span>, np = All.length; n &lt; np; n++) &#123;</div><div class="line">            <span class="keyword">if</span> (d.style[All[n]] === <span class="string">""</span>) <span class="keyword">return</span> All[n];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;());</div></pre></td></tr></table></figure></p>
 
         
         
@@ -111,7 +137,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/动画-js/">动画 js</a>
+  <span></span> <a href="/tags/javascript/">javascript</a><a href="/tags/animation/">animation</a><a href="/tags/transition/">transition</a><a href="/tags/requestAnimationFrame/">requestAnimationFrame</a>
   </div>
 
 </div>
@@ -143,7 +169,7 @@
   </h1>
   <p class="article-author">By
        
-		<a href="/about" title="孙华" target="_blank" itemprop="author">孙华</a>
+		<a href="/about" title="hua" target="_blank" itemprop="author">hua</a>
 		
   <p class="article-time">
     <time datetime="2015-07-25T11:52:38.000Z" itemprop="datePublished"> 发表于 2015-07-25</time>
@@ -153,11 +179,11 @@
     <div class="article-content">
         
         <p>这篇博客记录了我搭建我的个人博客的全过程。网络上有很多关于搭建个人博客的文章，但很多文章都不全，这里完整的记录了我搭建这儿静态博客的过程，希望可以帮助有相同需求的人。</p>
-<p>##前言<br>为什么要写博客，因为我想就下自己在学习和生活中的点点滴滴。以前学习很多东西，看一两遍就记住了。但是最近发现自己的记性没有以前好了，所以就想到了建个博客。一来可以把自己学习经验和生活感触写下来，二来是可以和大家分享自己的那么一点点有用的东西。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>为什么要写博客，因为我想就下自己在学习和生活中的点点滴滴。以前学习很多东西，看一两遍就记住了。但是最近发现自己的记性没有以前好了，所以就想到了建个博客。一来可以把自己学习经验和生活感触写下来，二来是可以和大家分享自己的那么一点点有用的东西。</p>
 <p>为什么要开博客？可以看看cnFeat的这篇<a href="http://zhuanlan.zhihu.com/cnfeat/19743861" target="_blank" rel="external">《为什么你要写博客？》</a></p>
 <p>或者也可看看这篇文章<a href="http://zhuanlan.zhihu.com/cnfeat/19743255" target="_blank" rel="external">《我的博客时代》</a></p>
 <p>有人会问为什么要搭建一个属于自己的独立博客，网上有很多博客网站可以选择。答案很简单，一个独立的博客是真正属于自己的。</p>
-<p>##为什么选择hexo和Github Pages<br>很多人用wordpress，你为什么要用github pages来搭建？</p>
+<h2 id="为什么选择hexo和Github-Pages"><a href="#为什么选择hexo和Github-Pages" class="headerlink" title="为什么选择hexo和Github Pages"></a>为什么选择hexo和Github Pages</h2><p>很多人用wordpress，你为什么要用github pages来搭建？</p>
 <ol>
 <li>github pages有300M免费空间，资料自己管理，保存可靠；</li>
 <li>学着用github，享受github的便利，上面有很多大牛，眼界会开阔很多；</li>
@@ -167,25 +193,25 @@
 <li>就算github被墙了，我可以搬到国内的gitcafe中去。</li>
 </ol>
 <p>hexo可以帮助生成静态页面。</p>
-<p>##GitHub Pages是什么？<br>GitHub Pages本用于介绍托管在GitHub上的项目， 不过，由于他的空间免费稳定，用来做搭建一个博客再好不过了。</p>
+<h2 id="GitHub-Pages是什么？"><a href="#GitHub-Pages是什么？" class="headerlink" title="GitHub Pages是什么？"></a>GitHub Pages是什么？</h2><p>GitHub Pages本用于介绍托管在GitHub上的项目， 不过，由于他的空间免费稳定，用来做搭建一个博客再好不过了。</p>
 <blockquote>
-<p>github Pages可以被认为是用户编写的、托管在github上的静态网页。<br><img src="http://cnfeat.qiniudn.com/1.png" alt=""></p>
+<p>github Pages可以被认为是用户编写的、托管在github上的静态网页。<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-1.png" alt=""></p>
 </blockquote>
-<p>##购买域名<br>只推荐上godaddy购买，安全，而且可以使用支付宝。</p>
+<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p>只推荐上godaddy购买，安全，而且可以使用支付宝。</p>
 <p>教程（截止至2014年5月10日）如下</p>
-<p><strong>1、查你想要的域名；</strong><br><img src="http://cnfeat.qiniudn.com/2.png" alt=""></p>
-<p><strong>2、查到适合的域名之后选择「continue to Cart」;</strong><br><img src="http://cnfeat.qiniudn.com/3.png" alt=""></p>
-<p><strong>3、godaddy附加收费服务，不要管，继续「continue to Cart」;</strong><br><img src="http://cnfeat.qiniudn.com/4.png" alt=""></p>
-<p><strong>4、确认购买。</strong>修改购买年限，默认是两年，可以修改成1/2/3/5/10年，随自己喜欢。现在godaddy上com每年的默认费用是12.99美元，附加上ICANN的管理费用就是13.17美元。<br><img src="http://cnfeat.qiniudn.com/5.png" alt=""><br>如果你不是土豪，可以上网搜godaddy的优惠码，一大堆，找一个填进这里，填完之后，一年的费用会变成8.99美元。<br><img src="http://cnfeat.qiniudn.com/61.png" alt=""></p>
+<p><strong>1、查你想要的域名；</strong><br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-2.png" alt=""></p>
+<p><strong>2、查到适合的域名之后选择「continue to Cart」;</strong><br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-3.png" alt=""></p>
+<p><strong>3、godaddy附加收费服务，不要管，继续「continue to Cart」;</strong><br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-4.png" alt=""></p>
+<p><strong>4、确认购买。</strong> 修改购买年限，默认是两年，可以修改成1/2/3/5/10年，随自己喜欢。现在godaddy上com每年的默认费用是12.99美元，附加上ICANN的管理费用就是13.17美元。<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-5.png" alt=""><br>如果你不是土豪，可以上网搜godaddy的优惠码，一大堆，找一个填进这里，填完之后，一年的费用会变成8.99美元。<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-61.png" alt=""></p>
 <p><strong>说明一下：</strong>一般来讲，使用网上的优惠码第一年收费8.99美元，以后每年的收费是10.99美元，不过在网上可以搜到合适的优惠码，可以每年的收费都是8.99美元，记得多测试自行鉴别。</p>
 <p>如图，我买了五年的费用就是45.85美元，随后点击「Proceed to Checkout」</p>
-<p><img src="http://cnfeat.qiniudn.com/6.png" alt=""></p>
-<p><strong>5、结算。</strong>登录或注册界面，填完必要的信息之后，选择用支付宝结算。<br><img src="http://cnfeat.qiniudn.com/7.png" alt=""><br>如果以上的教程如果不够清晰，可以参照这一份<a href="http://www.admin5.com/article/20131014/527495.shtml" target="_blank" rel="external">《2013年10月新版godaddy域名注册图文教程》</a>。</p>
-<p><strong>6、检查。</strong>结算后，重新登录，去「My Account」，域名已经显示在你的账户了。<br><img src="http://cnfeat.qiniudn.com/8.png" alt=""></p>
+<p><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-6.png" alt=""></p>
+<p><strong>5、结算。</strong>登录或注册界面，填完必要的信息之后，选择用支付宝结算。<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-7.png" alt=""><br>如果以上的教程如果不够清晰，可以参照这一份<a href="http://www.admin5.com/article/20131014/527495.shtml" target="_blank" rel="external">《2013年10月新版godaddy域名注册图文教程》</a>。</p>
+<p><strong>6、检查。</strong>结算后，重新登录，去「My Account」，域名已经显示在你的账户了。<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-8.png" alt=""></p>
 <p><strong>7、补充一些注意事项：</strong></p>
 <p>–输入优惠码没有优惠或者优惠幅度较低，请清除浏览器cookies再尝试；<br>–如果没有支付宝支付选项，有可能是使用的优惠码不支持支付宝，请重新清除浏览器cookies再尝试；<br>–注册时用户填写信息时一定要输入正确的邮箱名字，否则修改十分麻烦。<br>–买完域名之后一定要记得去自己的邮箱查看激活邮件，否则域名激活不了。</p>
 <h2 id="安装所需软件"><a href="#安装所需软件" class="headerlink" title="安装所需软件"></a>安装所需软件</h2><p>安装下来软件：<br>–{Node.js](<a href="http://nodejs.org/" target="_blank" rel="external">http://nodejs.org/</a>)<br>–<a href="http://git-scm.com/" target="_blank" rel="external">Git</a></p>
-<h2 id="打开Git"><a href="#打开Git" class="headerlink" title="打开Git"></a>打开Git</h2><p>可以通过下面两种方式打开Git：<br>–Windows开始菜单的快捷方式it Bash<br>！<a href="http://cnfeat.qiniudn.com/9.jpg" target="_blank" rel="external"></a><br>–鼠标右键打开Git Bash<br><img src="http://cnfeat.qiniudn.com/s10.jpg" alt=""></p>
+<h2 id="打开Git"><a href="#打开Git" class="headerlink" title="打开Git"></a>打开Git</h2><p>可以通过下面两种方式打开Git：<br>–Windows开始菜单的快捷方式it Bash<br>！<a href="http://7xkn13.com1.z0.glb.clouddn.com/7-25-9.jpg" target="_blank" rel="external"></a><br>–鼠标右键打开Git Bash<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-s10.jpg" alt=""></p>
 <h2 id="验证Node-js是否安装成功"><a href="#验证Node-js是否安装成功" class="headerlink" title="验证Node.js是否安装成功"></a>验证Node.js是否安装成功</h2><p>在Windows下win+R打开运行，输入cmd回车<br><img src="" alt=""><br>打开命令行窗口<br><img src="" alt=""><br>在命令行窗口输入node回车，出现下面的提示表示安装成功<br><img src="" alt=""></p>
 <h2 id="注册Github"><a href="#注册Github" class="headerlink" title="注册Github"></a>注册Github</h2><p>访问：<a href="http://www.github.com" target="_blank" rel="external">www.github.com</a></p>
 <p>注册你的username和邮箱，邮箱十分重要，GitHub上很多通知都是通过邮箱的。</p>
@@ -200,11 +226,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):&lt;输入加密串&gt;</div><div class="line">Enter same passphrase again:&lt;再次输入加密串&gt;</div></pre></td></tr></table></figure>
 <p>在回车中会提示你输入一个密码，这个密码会在你提交项目时使用，如果为空的话提交项目时则不用输入。这个设置是防止别人往你的项目里提交内容。</p>
 <p>注意：输入密码的时候没有*字样的，你直接输入就可以了。</p>
-<p>最后看到这样的界面，就成功设置ssh key了：<br><img src="http://cnfeat.qiniudn.com/11.png" alt=""></p>
+<p>最后看到这样的界面，就成功设置ssh key了：<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-11.png" alt=""></p>
 <h3 id="添加SSH-Key到GitHub"><a href="#添加SSH-Key到GitHub" class="headerlink" title="添加SSH Key到GitHub"></a>添加SSH Key到GitHub</h3><p>在本机设置SSH Key之后，需要添加到GitHub上，以完成SSH链接的设置。</p>
 <p>–打开本地C:\Documents and Settings\Administrator.ssh\id_rsa.pub文件。此文件里面内容为刚才生成人密钥。如果看不到这个文件，你需要设置显示隐藏文件。准确的复制这个文件的内容，才能保证设置的成功。</p>
 <p>–登陆github系统。点击右上角的 Account Settings—-&gt;SSH Public keys —-&gt; add another public keys</p>
-<p>–把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了<br><img src="http://cnfeat.qiniudn.com/s12.jpg" alt=""></p>
+<p>–把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-s12.jpg" alt=""></p>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>可以输入下面的命令，看看设置是否成功，git@github.com的部分不要修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div></pre></td></tr></table></figure></p>
 <p>如果是下面的反馈：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">The authenticity of host <span class="string">'github.com (207.97.227.239)'</span> can<span class="string">'t be established.</span></div><div class="line">RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.</div><div class="line">Are you sure you want to continue connecting (yes/no)?</div></pre></td></tr></table></figure></p>
 <p>不要紧张，输入yes就好，然后会看到：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hi cnfeat! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></div></pre></td></tr></table></figure></p>
@@ -216,7 +242,7 @@
 <p><a href="http://help.github.com/articles/error-permission-denied-publickey" target="_blank" rel="external">GitHub Help - Error Permission denied (publickey)</a></p>
 <h2 id="使用GitHub-Pages建立博客"><a href="#使用GitHub-Pages建立博客" class="headerlink" title="使用GitHub Pages建立博客"></a>使用GitHub Pages建立博客</h2><p>与GitHub建立好链接之后，就可以方便的使用它提供的Pages服务，GitHub Pages分两种，一种是你的GitHub用户名建立的username.github.io这样的用户&amp;组织页（站），另一种是依附项目的pages。</p>
 <p>想建立个人博客是用的第一种，形如<a href="https://suen427.github.io" target="_blank" rel="external">suen427.github.io</a>这样的可访问的站，每个用户名下面只能建立一个。</p>
-<h3 id="github上建立仓库"><a href="#github上建立仓库" class="headerlink" title="github上建立仓库"></a>github上建立仓库</h3><p>登录后系统，在github首页，点击页面右下角「New Repository」<br><img src="http://cnfeat.qiniudn.com/13.png" alt=""><br>填写项目信息：</p>
+<h3 id="github上建立仓库"><a href="#github上建立仓库" class="headerlink" title="github上建立仓库"></a>github上建立仓库</h3><p>登录后系统，在github首页，点击页面右下角「New Repository」<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-13.png" alt=""><br>填写项目信息：</p>
 <p><strong>project name：</strong>cnfeat.github.io</p>
 <p><strong>description：</strong> Sun’s Blog</p>
 <p>注：Github Pages的Repository名字是特定的，比如我Github账号是suen427，那么我Github Pages Repository名字就是suen427.github.io。<br>点击「Create Repository」完成创建。</p>
@@ -239,12 +265,12 @@
 <h2 id="将独立域名与GitHub-Pages的空间绑定"><a href="#将独立域名与GitHub-Pages的空间绑定" class="headerlink" title="将独立域名与GitHub Pages的空间绑定"></a>将独立域名与GitHub Pages的空间绑定</h2><h3 id="GitHub-Pages的设置"><a href="#GitHub-Pages的设置" class="headerlink" title="GitHub Pages的设置"></a>GitHub Pages的设置</h3><p>方法一：在Repository的根目录下面，新建一个名为CNAME的文本文件，里面写入你要绑定的域名，比如suen427.com。</p>
 <p>方法二：到我的github仓库，点击右下角的「Download ZIP」，下载源文件，解压，找到CNAME文件，用记事本打开，将suen427.com修改成你的域名，放进Hexo\source目录下，用hexo命令提交上去。</p>
 <h3 id="DNS设置"><a href="#DNS设置" class="headerlink" title="DNS设置"></a>DNS设置</h3><p>用DNSpod，快，免费，稳定。</p>
-<p>注册DNSpod，添加域名，如下图设置。<br><img src="http://cnfeat.qiniudn.com/15.png" alt=""></p>
+<p>注册DNSpod，添加域名，如下图设置。<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-15.png" alt=""></p>
 <p>其中A的两条记录指向的ip地址是github Pages的提供的ip</p>
 <p>-192.30.252.153<br>-192.30.252.154</p>
 <p>如博客不能登录，有可能是github更改了空间服务的ip地址，记得及时到在<a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages" target="_blank" rel="external">GitHub Pages</a>查看最新的ip即可</p>
 <p>www指定的记录是你在github注册的仓库。</p>
-<h3 id="去Godaddy修改DNS地址"><a href="#去Godaddy修改DNS地址" class="headerlink" title="去Godaddy修改DNS地址"></a>去Godaddy修改DNS地址</h3><p>更改godaddy的Nameservers为DNSpod的NameServers。<br><img src="http://cnfeat.qiniudn.com/16.png" alt=""><br>1、点击「My Account」，管理我的域名。<br><img src="http://cnfeat.qiniudn.com/17.jpg" alt=""><br>2、点击域名。<br><img src="http://cnfeat.qiniudn.com/18.jpg" alt=""><br>3、将godaddy的Nameservers更改成f1g1ns1.dnspod.net和f1g1ns2.dnspod.net<br><img src="http://cnfeat.qiniudn.com/19.jpg" alt=""><br>如有不详看可以看<a href="https://support.dnspod.cn/Kb/showarticle/tsid/42/" target="_blank" rel="external">DNSpod提供的官方帮助</a></p>
+<h3 id="去Godaddy修改DNS地址"><a href="#去Godaddy修改DNS地址" class="headerlink" title="去Godaddy修改DNS地址"></a>去Godaddy修改DNS地址</h3><p>更改godaddy的Nameservers为DNSpod的NameServers。<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-16.png" alt=""><br>1、点击「My Account」，管理我的域名。<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-17.jpg" alt=""><br>2、点击域名。<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-18.jpg" alt=""><br>3、将godaddy的Nameservers更改成f1g1ns1.dnspod.net和f1g1ns2.dnspod.net<br><img src="http://7xkn13.com1.z0.glb.clouddn.com/7-25-19.jpg" alt=""><br>如有不详看可以看<a href="https://support.dnspod.cn/Kb/showarticle/tsid/42/" target="_blank" rel="external">DNSpod提供的官方帮助</a></p>
 <p>详细也可以看这里：<a href="http://pchou.info/web-build/2013/01/05/build-github-blog-page-03.html" target="_blank" rel="external">一步步在GitHub上创建博客主页(3)</a></p>
 <h2 id="搭建完成"><a href="#搭建完成" class="headerlink" title="搭建完成"></a>搭建完成</h2><p>至此，独立博客就算搭建完成，如需进步一完善请在参看以下文章或博客下留言。</p>
 <p><a href="http://yangjian.me/workspace/introducing-pacman-theme/" target="_blank" rel="external">Pacman主题介绍</a> by yangjian</p>
@@ -354,6 +380,10 @@
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/javascript/" title="javascript">javascript<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
 			
 		
@@ -366,7 +396,17 @@
 			
 		
 			
-				<li><a href="/tags/动画-js/" title="动画 js">动画 js<sup>1</sup></a></li>
+				<li><a href="/tags/animation/" title="animation">animation<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/transition/" title="transition">transition<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/requestAnimationFrame/" title="requestAnimationFrame">requestAnimationFrame<sup>1</sup></a></li>
+			
+		
 			
 		
 		</ul>
@@ -441,7 +481,7 @@
 		<p class="copyright">
 		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
 		
-		<a href="/about" target="_blank" title="孙华">孙华</a>
+		<a href="/about" target="_blank" title="hua">hua</a>
 		
 		
 		</p>
