@@ -25,7 +25,7 @@
 我觉得首先是js实现动画有更好的兼容性，现在还是有许多页面需要兼容ie8等比较老的浏览器。
 另外就是使用js实现，我们可以更好的控制整个动画。比如我们可以通过js来暂停动画，而css animation则不行。
 还有一点就是css transition会强制使用GPU硬件">
-<meta property="og:updated_time" content="2017-03-18T11:09:21.979Z">
+<meta property="og:updated_time" content="2017-03-19T10:40:51.080Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css animation还是js animation">
 <meta name="twitter:description" content="现在浏览器对css animation和css transition的支持已经很好了。那么我们为什么还要用js来实现动画呢？
@@ -129,17 +129,17 @@
 </blockquote>
 <p>我对四条规则的理解：</p>
 <ol>
-<li>在同步DOM的补间操作时最小化布局的抖动。 我的理解就是使用高效的css样式。比如在页面中移动某个element的时候，<br>最简单的方法就是使用<code>top</code>或者<code>left</code>属性。但是这样做是不高效的，因为每次改变元素的<code>top</code>或者<code>left</code>值，都会让浏览器强制重新计算布局（layout）<br>，这是很费费计算开销的操作。而高效的操作时使用<code>transform</code>属性，他可以避免不必要的重新布局，而且会使用GPU的硬件加速。<br><a href="https://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/" target="_blank" rel="external">详情参见</a></li>
-<li><p>缓存一些数值以最小化DOM查询，这是因为DOM查询的开销一般也是比较大的（DOM查询是DOM动画的阿喀琉斯之踵）。对原文中<code>chained calls</code>的理解，<br>我觉得是在补间动画中的操作。最好将DOM查询的顺序放在最前面，最后统一设置样式，如下所示：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//错误的做法：</span></div><div class="line"><span class="keyword">var</span> ele = <span class="built_in">document</span>.getElemtById(eleId);</div><div class="line"><span class="keyword">var</span> top = <span class="built_in">parseInt</span>(ele.style.top);</div><div class="line">ele.style.top = top + <span class="number">10</span> + <span class="string">'px'</span>;</div><div class="line"><span class="keyword">var</span> left = <span class="built_in">parseInt</span>(ele.style.left);</div><div class="line">ele.style.left = left + <span class="number">10</span> + <span class="string">'px'</span>;</div><div class="line"></div><div class="line"><span class="comment">//正确的做法：</span></div><div class="line"><span class="keyword">var</span> ele = <span class="built_in">document</span>.getElemtById(eleId);</div><div class="line"><span class="comment">//先查询</span></div><div class="line"><span class="keyword">var</span> top = <span class="built_in">parseInt</span>(ele.style.top);</div><div class="line"><span class="keyword">var</span> left = <span class="built_in">parseInt</span>(ele.style.left);</div><div class="line"><span class="comment">//再设置</span></div><div class="line">ele.style.left = left + <span class="number">10</span> + <span class="string">'px'</span>;</div><div class="line">ele.style.top = top + <span class="number">10</span> + <span class="string">'px'</span>;</div></pre></td></tr></table></figure>
+<li>在同步DOM的补间操作时最小化布局的抖动。 我的理解就是使用高效的css样式。比如在页面中移动某个element的时候，最简单的方法就是使用<code>top</code>或者<code>left</code>属性。但是这样做是不高效的，因为每次改变元素的<code>top</code>或者<code>left</code>值，都会让浏览器强制重新计算布局（layout），这是很费费计算开销的操作。而高效的操作时使用<code>transform</code>属性，他可以避免不必要的重新布局，而且会使用GPU的硬件加速。<a href="https://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/" target="_blank" rel="external">详情参见</a></li>
+<li><p>缓存一些数值以最小化DOM查询，这是因为DOM查询的开销一般也是比较大的（DOM查询是DOM动画的阿喀琉斯之踵）。对原文中<code>chained calls</code>的理解，我觉得是在补间动画中的操作。最好将DOM查询的顺序放在最前面，最后统一设置样式，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//错误的做法：</span></div><div class="line"><span class="keyword">var</span> ele = <span class="built_in">document</span>.getElemtById(eleId);</div><div class="line"><span class="keyword">var</span> top = <span class="built_in">parseInt</span>(ele.style.top);</div><div class="line">ele.style.top = top + <span class="number">10</span> + <span class="string">'px'</span>;</div><div class="line"><span class="keyword">var</span> left = <span class="built_in">parseInt</span>(ele.style.left);</div><div class="line">ele.style.left = left + <span class="number">10</span> + <span class="string">'px'</span>;</div><div class="line"></div><div class="line"><span class="comment">//正确的做法：</span></div><div class="line"><span class="keyword">var</span> ele = <span class="built_in">document</span>.getElemtById(eleId);</div><div class="line"><span class="comment">//先查询</span></div><div class="line"><span class="keyword">var</span> top = <span class="built_in">parseInt</span>(ele.style.top);</div><div class="line"><span class="keyword">var</span> left = <span class="built_in">parseInt</span>(ele.style.left);</div><div class="line"><span class="comment">//再设置</span></div><div class="line">ele.style.left = left + <span class="number">10</span> + <span class="string">'px'</span>;</div><div class="line">ele.style.top = top + <span class="number">10</span> + <span class="string">'px'</span>;</div></pre></td></tr></table></figure>
 </li>
 <li><p>在同一次调用中，跨元素缓存单位转化比例。</p>
 </li>
 <li>忽略不可察觉的样式变化。</li>
 <li>自己补充一点，使用<code>requestAnimationFrame</code>替代<code>setTimeout</code>和<code>setInterval</code>。</li>
 </ol>
-<h3 id="回到文章主题，是选择css-animation还是js-animation？"><a href="#回到文章主题，是选择css-animation还是js-animation？" class="headerlink" title="回到文章主题，是选择css animation还是js animation？"></a>回到文章主题，是选择css animation还是js animation？</h3><p>对于简单的、不需要过多控制的动画需求且对浏览器要求不高可以使用纯css animation。<br>如果对浏览器兼容性要求较高，或者对动画的控制比较多，那么建议使用js 动画。<br>这里推荐两个库，一个是纯css动画库：<a href="https://github.com/daneden/animate.css" target="_blank" rel="external">animation.css</a>，这个库实有许多动css画效果。<br>另外一个是js动画插件：<a href="https://github.com/julianshapiro/velocity" target="_blank" rel="external">velocity.js</a>.velocity.js实现了jquery中的所有动画效果，<br>但是性能比jquery动画要好许多，而且可以不依赖jquery。</p>
-<p>附上一个css属性支持检测方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* cssDetect(cssName)</span></div><div class="line"> *     cssName: 需要检测的css属性值</div><div class="line"> *     renturn: 如果不支持对应的css属性返回：false</div><div class="line"> *         如果支持，则返回支持的css属性名，放回的属性名可能带厂商前缀（webkit或moz）</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> cssDetect = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> CSSprefix = <span class="string">"webkit,moz"</span>.split(<span class="string">","</span>),</div><div class="line">        d = create(<span class="string">"div"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">prop</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> Uprop = prop.charAt(<span class="number">0</span>).toUpperCase() + prop.substr(<span class="number">1</span>),</div><div class="line">            All = (prop + <span class="string">' '</span> + CSSprefix.join(Uprop + <span class="string">' '</span>) + Uprop).split(<span class="string">' '</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> n = <span class="number">0</span>, np = All.length; n &lt; np; n++) &#123;</div><div class="line">            <span class="keyword">if</span> (d.style[All[n]] === <span class="string">""</span>) <span class="keyword">return</span> All[n];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;());</div></pre></td></tr></table></figure></p>
+<h3 id="回到文章主题，是选择css-animation还是js-animation？"><a href="#回到文章主题，是选择css-animation还是js-animation？" class="headerlink" title="回到文章主题，是选择css animation还是js animation？"></a>回到文章主题，是选择css animation还是js animation？</h3><p>对于简单的、不需要过多控制的动画需求且对浏览器要求不高可以使用纯css animation。如果对浏览器兼容性要求较高，或者对动画的控制比较多，那么建议使用js 动画。这里推荐两个库，一个是纯css动画库：<a href="https://github.com/daneden/animate.css" target="_blank" rel="external">animation.css</a>，这个库实有许多动css画效果。另外一个是js动画插件：<a href="https://github.com/julianshapiro/velocity" target="_blank" rel="external">velocity.js</a>.velocity.js实现了jquery中的所有动画效果，但是性能比jquery动画要好许多，而且可以不依赖jquery。</p>
+<p>附上一个css属性支持检测方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* cssDetect(cssName)</span></div><div class="line"> *     cssName: 需要检测的css属性值</div><div class="line"> *     renturn: 如果不支持对应的css属性返回：false</div><div class="line"> *         如果支持，则返回支持的css属性名，放回的属性名可能带厂商前缀（webkit或moz）</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> cssDetect = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> CSSprefix = <span class="string">"webkit,moz"</span>.split(<span class="string">","</span>),</div><div class="line">        d = create(<span class="string">"div"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">prop</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> Uprop = prop.charAt(<span class="number">0</span>).toUpperCase() + prop.substr(<span class="number">1</span>),</div><div class="line">            All = (prop + <span class="string">' '</span> + CSSprefix.join(Uprop + <span class="string">' '</span>) + Uprop).split(<span class="string">' '</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> n = <span class="number">0</span>, np = All.length; n &lt; np; n++) &#123;</div><div class="line">            <span class="keyword">if</span> (d.style[All[n]] === <span class="string">""</span>) <span class="keyword">return</span> All[n];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;());</div></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -175,6 +175,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2017/03/18/函数声明和函数表达式/" title="函数声明和函数表达式">
+  <strong>上一篇：</strong><br/>
+  <span>
+  函数声明和函数表达式</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/07/25/how-tob-build-a-blog/"  title="通过Hexo与github搭建一个静态的个人博客">
@@ -211,7 +219,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/前端/" title="前端">前端<sup>1</sup></a></li>
+			<li><a href="/categories/前端/" title="前端">前端<sup>2</sup></a></li>
 		  
 		
 		  
@@ -228,19 +236,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/javascript/" title="javascript">javascript<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
+				<li><a href="/tags/javascript/" title="javascript">javascript<sup>2</sup></a></li>
 			
 		
 			
@@ -255,6 +251,16 @@
 				<li><a href="/tags/requestAnimationFrame/" title="requestAnimationFrame">requestAnimationFrame<sup>1</sup></a></li>
 			
 		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
 			
 		
 		</ul>
